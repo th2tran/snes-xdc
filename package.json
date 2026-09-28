@@ -1,0 +1,19 @@
+{
+  "name": "snes-xdc",
+  "version": "0.0.1+6",
+  "description": "SNES emulator for Web-XDC",
+  "license": "MIT",
+  "author": "th2tran",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "sync-version": "node -e \"const fs=require('fs');const packagePath='./package.json';const pkg=require(packagePath);const match=/^(.*)\\\\+(\\\\d+)$/.exec(pkg.version);if(!match)throw new Error('Version must end with +<build number>');pkg.version=match[1]+'+'+(Number(match[2])+1);fs.writeFileSync(packagePath,JSON.stringify(pkg,null,2)+'\\\\n');fs.writeFileSync('version.js','window.SNES_XDC_APP_VERSION = '+JSON.stringify(pkg.version)+';\\\\n');\"",
+    "build": "mkdir -p dist && npm run sync-version && bestzip dist/snes-xdc-$(node -p \"require('./package.json').version.replace('+', '.')\").xdc manifest.toml index.html emulatorjs/** icon.png game.sfc",
+    "start": "webxdc-dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@webxdc/webxdc-dev": "^0.21.0",
+    "bestzip": "^2.2.1"
+  }
+}

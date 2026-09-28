@@ -1,0 +1,4 @@
+name = "SNES-XDC"
+subtitle = "Super Nintendo Entertainment System Emulator for Web-XDC"
+description = "Play SNES games in your browser with Web-XDC!"
+icon = "icon.png"
